@@ -11,37 +11,49 @@ import org.springframework.web.bind.annotation.RestController;
 
 import board.board.dto.BoardDto;
 import board.board.service.BoardService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
+@Api(description = "게시판 REST API")
+//@Api(tags = {"Swagger Resource"})
+//@SwaggerDefinition(tags = {
+//		@Tag(name = "Swagger Resource", description = "게시판 REST API")
+//})
 @RestController
 public class RestBoardApiController {
-	
+
 	@Autowired
 	private BoardService boardService;
-	
-	@RequestMapping(value="/api/board", method=RequestMethod.GET)
-	public List<BoardDto> openBoardList() throws Exception{
+
+	@ApiOperation(value = "게시글 목록 조회")
+	@RequestMapping(value = "/api/board", method = RequestMethod.GET)
+	public List<BoardDto> openBoardList() throws Exception {
 		return boardService.selectBoardList();
 	}
-	
-	@RequestMapping(value="/api/board/write", method=RequestMethod.POST)
-	public void insertBoard(@RequestBody BoardDto board) throws Exception{
+
+	@ApiOperation(value = "게시글 작성")
+	@RequestMapping(value = "/api/board/write", method = RequestMethod.POST)
+	public void insertBoard(@RequestBody BoardDto board) throws Exception {
 		boardService.insertBoard(board, null);
 	}
-	
-	@RequestMapping(value="/api/board/{boardIdx}", method=RequestMethod.GET)
-	public BoardDto openBoardDetail(@PathVariable("boardIdx") int boardIdx) throws Exception{
-		
+
+	@ApiOperation(value = "게시글 상세 내용 조회")
+	@RequestMapping(value = "/api/board/{boardIdx}", method = RequestMethod.GET)
+	public BoardDto openBoardDetail(@PathVariable("boardIdx") int boardIdx) throws Exception {
+
 		return boardService.selectBoardDetail(boardIdx);
 	}
-	
-	@RequestMapping(value="/api/board/{boardIdx}", method=RequestMethod.PUT)
-	public String updateBoard(@RequestBody BoardDto board) throws Exception{
+
+	@ApiOperation(value = "게시글 상세 내용 수정 ")
+	@RequestMapping(value = "/api/board/{boardIdx}", method = RequestMethod.PUT)
+	public String updateBoard(@RequestBody BoardDto board) throws Exception {
 		boardService.updateBoard(board);
 		return "redirect:/board";
 	}
-	
-	@RequestMapping(value="/api/board/{boardIdx}", method=RequestMethod.DELETE)
-	public String deleteBoard(@PathVariable("boardIdx") int boardIdx) throws Exception{
+
+	@ApiOperation(value = "게시글 삭제")
+	@RequestMapping(value = "/api/board/{boardIdx}", method = RequestMethod.DELETE)
+	public String deleteBoard(@PathVariable("boardIdx") int boardIdx) throws Exception {
 		boardService.delBoard(boardIdx);
 		return "redirect:/board";
 	}

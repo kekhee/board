@@ -22,7 +22,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
-@PropertySource("classpath:/application.properties")
+
 @EnableTransactionManagement
 // 1 프로포티스 사용 설정파일의 위치
 public class DatabaseConfiguration {

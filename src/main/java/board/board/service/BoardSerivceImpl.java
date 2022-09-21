@@ -11,7 +11,6 @@ import board.board.dto.BoardDto;
 import board.board.dto.BoardFileDto;
 import board.board.mapper.BoardMapper;
 import board.common.FileUtils;
-import lombok.extern.slf4j.Slf4j;
 
 @Service
 
